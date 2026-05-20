@@ -1,7 +1,8 @@
 @php
-  $navClass = fn (bool $active) => $active
-      ? 'text-primary-fixed bg-primary-container/20 border-l-4 border-primary-fixed font-bold px-6 py-3 flex items-center gap-4 text-body-md transition-colors duration-200'
-      : 'text-surface-variant/80 hover:text-surface-bright hover:bg-surface-variant/10 px-6 py-3 flex items-center gap-4 text-body-md transition-colors duration-200';
+$navClass = fn (bool $active) =>
+    $active
+        ? 'text-primary-fixed bg-primary-container/20 border-l-4 border-primary-fixed font-bold px-6 py-3 flex items-center gap-4 text-body-md transition-colors duration-200'
+        : 'text-inverse-on-surface/70 hover:text-inverse-on-surface hover:bg-white/5 px-6 py-3 flex items-center gap-4 text-body-md transition-colors duration-200';
 @endphp
 
 <aside class="w-[260px] h-screen fixed left-0 top-0 bg-inverse-surface shadow-md flex flex-col py-8 z-50">
@@ -11,7 +12,6 @@
     </div>
     <div>
       <h1 class="text-headline-md font-headline-md text-primary-fixed leading-none">Inventory Manager</h1>
-      <p class="text-[10px] text-surface-variant/60 tracking-widest font-bold">INVENTORY PRO</p>
     </div>
   </div>
 
@@ -51,10 +51,10 @@
     </a> -->
 
     <div class="mt-auto">
-      <a href="#" class="{{ $navClass(false) }}">
+      <!-- <a href="#" class="{{ $navClass(false) }}">
         <span class="material-symbols-outlined">settings</span>
         Paramètres
-      </a>
+      </a> -->
       <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit" class="w-full text-left {{ $navClass(false) }}">

@@ -32,38 +32,68 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
+        // Base data
         $categories = Category::orderBy('name')->get();
         $suppliers = Supplier::orderBy('name')->get();
-        $totalProducts = Product::count();
 
-        $name = $request->name;
-
+        // Base query
         $query = Product::with(['category', 'supplier']);
 
-        //  search by product name
-        $query->when($name, function ($query) use ($name) {
-            $query->where('name', 'like', "%{$name}%");
-        });
+        // Filters
+        $query->when(
+            $request->name,
+            fn($q, $name) =>
+            $q->where('name', 'like', "%{$name}%")
+        );
 
-        //  category filter
-        $query->when($request->filled('category_id'), function ($query) use ($request) {
-            $query->where('category_id', $request->category_id);
-        });
+        $query->when(
+            $request->filled('category_id'),
+            fn($q) =>
+            $q->where('category_id', $request->category_id)
+        );
 
-        //  supplier filter
-        $query->when($request->filled('supplier_id'), function ($query) use ($request) {
-            $query->where('supplier_id', $request->supplier_id);
-        });
+        $query->when(
+            $request->filled('supplier_id'),
+            fn($q) =>
+            $q->where('supplier_id', $request->supplier_id)
+        );
 
+    
         $products = $query->latest()->paginate(10)->withQueryString();
 
-        return view('products.index', [
-            'products' => $products,
-            'categories' => $categories,
-            'suppliers' => $suppliers,
-            'totalProducts' => $totalProducts,
-            'name' => $name
-        ]);
+       
+
+        $totalProducts = Product::count();
+
+        $mostStocked = Product::orderByDesc('quantity_stock')->first();
+
+        $leastStocked = Product::orderBy('quantity_stock')->first();
+
+        // last 7 days added
+        $lastWeekCount = Product::where('created_at', '>=', now()->subDays(7))->count();
+
+        // growth %
+        $previousWeekCount = Product::whereBetween('created_at', [
+            now()->subDays(14),
+            now()->subDays(7)
+        ])->count();
+
+        $lastWeekPercent = $previousWeekCount > 0
+            ? round((($lastWeekCount - $previousWeekCount) / $previousWeekCount) * 100, 1)
+            : 0;
+
+        return view('products.index', compact(
+            'products',
+            'categories',
+            'suppliers',
+            'totalProducts',
+            'mostStocked',
+            'leastStocked',
+            'lastWeekCount',
+            'lastWeekPercent'
+        ))->with([
+                    'name' => $request->name
+                ]);
     }
 
     public function create(): RedirectResponse

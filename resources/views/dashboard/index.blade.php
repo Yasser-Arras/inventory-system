@@ -31,7 +31,7 @@
     {{-- STATS --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
 
-      <div class="ambient-card p-6 rounded-xl border-t-4 border-primary">
+      <div class="ambient-card p-6 rounded-xl border-t-4 border-quandale shadow p-5">
         <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
           <span class="material-symbols-outlined text-primary">inventory_2</span>
         </div>
@@ -41,7 +41,7 @@
         </h3>
       </div>
 
-      <div class="ambient-card p-6 rounded-xl border-t-4 border-secondary">
+      <div class="ambient-card p-6 rounded-xl shadow p-5  border-t-4 border-secondary">
         <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
           <span class="material-symbols-outlined text-secondary">point_of_sale</span>
         </div>
@@ -51,7 +51,7 @@
         </h3>
       </div>
 
-      <div class="ambient-card p-6 rounded-xl border-t-4 border-surface-tint">
+       <div class="ambient-card p-6 rounded-xl shadow p-5  border-t-4 border-primary">
         <div class="w-12 h-12 bg-surface-tint/10 rounded-lg flex items-center justify-center mb-4">
           <span class="material-symbols-outlined text-surface-tint">account_balance_wallet</span>
         </div>
@@ -61,7 +61,7 @@
         </h3>
       </div>
 
-      <div class="ambient-card p-6 rounded-xl border-t-4 border-error">
+      <div class="ambient-card p-6 rounded-xl border-t-4 border-error shadow p-5 ">
         <div class="flex items-center justify-between mb-4">
           <div class="w-12 h-12 bg-error/10 rounded-lg flex items-center justify-center">
             <span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">
@@ -88,8 +88,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter">
 
       {{-- NEW PRODUCTS --}}
-      <div class="ambient-card rounded-xl overflow-hidden flex flex-col">
-        <div class="p-4 border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
+      <div class="ambient-card rounded-xl overflow-hidden flex flex-col shadow ">
+        <div class="p-4 border-b  border-outline-variant bg-surface-container-low flex items-center justify-between">
           <h4 class="text-label-md font-bold text-on-surface">Nouveaux Produits</h4>
           <a href="{{ route('products.index') }}" class="text-outline hover:text-primary">
             <span class="material-symbols-outlined">open_in_new</span>
@@ -120,7 +120,7 @@
       </div>
 
       {{-- LOW STOCK --}}
-      <div class="ambient-card rounded-xl overflow-hidden flex flex-col">
+      <div class="ambient-card rounded-xl overflow-hidden flex flex-col shadow ">
         <div class="p-4 border-b border-outline-variant bg-error-container/20 flex items-center justify-between">
           <h4 class="text-label-md font-bold text-error flex items-center gap-2">
             <span class="material-symbols-outlined text-error text-[18px]">warning</span>
@@ -158,7 +158,8 @@
       </div>
 
       {{-- RECENT ACTIVITY --}}
-      <div class="ambient-card rounded-xl overflow-hidden flex flex-col">
+      <div class="ambient-card rounded-xl overflow-hidden flex flex-col shadow ">
+         <div class="p-4 border
         <div class="p-4 border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
           <h4 class="text-label-md font-bold text-on-surface">Activité Récente</h4>
           <span class="material-symbols-outlined text-outline">history</span>
@@ -202,7 +203,7 @@
       </div>
 
       {{-- BEST SELLERS --}}
-      <div class="ambient-card rounded-xl overflow-hidden flex flex-col">
+      <div class="ambient-card rounded-xl overflow-hidden flex flex-col shadow ">
         <div class="p-4 border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
           <h4 class="text-label-md font-bold text-on-surface flex items-center gap-2">
             <span class="material-symbols-outlined text-primary text-[18px]">trending_up</span>

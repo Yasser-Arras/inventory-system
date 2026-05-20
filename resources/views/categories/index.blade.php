@@ -60,15 +60,15 @@
     $fallback = "storage/category_icons/default.png";
     $icon = file_exists(public_path($iconPath)) ? $iconPath : $fallback;
 
-    // COLOR (cycles, no repeat until exhausted)
+    // COLOR 
     $color = $colors[$i % count($colors)];
     $i++;
 @endphp
 
-<div class="glass-card rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group relative">
+<div class="glass-card shadow rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group relative">
 
     {{-- TOP BAR --}}
-    <div class="h-2 w-full" style="background: {{ $color }}"></div>
+    <div class="h-2 w-full " style="background: {{ $color }}"></div>
 
     <div class="p-5">
 

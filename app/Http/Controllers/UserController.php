@@ -19,21 +19,25 @@ class UserController extends Controller
 
         return view('users.index', compact('users'));
     }
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+public function update(Request $request, $id)
+{
+    $user = User::findOrFail($id);
 
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'role' => ['required', 'string', 'max:50'],
-        ]);
+    $validated = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'max:255'],
+        'role' => ['required', 'string', 'max:50'],
+    ]);
 
-        $user->update($validated);
-
-        return back()->with('success', 'Utilisateur mis a jour');
+   
+    if (auth()->id() === $user->id && auth()->user()->role !== $validated['role']) {
+        return back()->with('error', 'You cannot change your own role.');
     }
 
+    $user->update($validated);
+
+    return back()->with('success', 'Utilisateur mis a jour');
+}
     public function destroy($id)
     {
         $user = User::findOrFail($id);

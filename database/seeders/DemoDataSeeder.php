@@ -23,14 +23,14 @@ class DemoDataSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Cashier User',
+            'name' => 'Cashier1',
             'email' => 'cashier@test.com',
             'password' => Hash::make('password'),
             'role' => 'cashier',
         ]);
 
         User::create([
-            'name' => 'Admin User',
+            'name' => 'Admin1',
             'email' => 'admin@test.com',
             'password' => Hash::make('password'),
             'role' => 'admin',

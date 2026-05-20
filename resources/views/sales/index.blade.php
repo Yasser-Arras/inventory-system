@@ -124,10 +124,10 @@
 
                                                         <span
                                                             class="px-2 py-1 rounded-full text-[11px] font-bold
-                                                                                                                                                {{ $product->quantity_stock <= 5
+                                                                                                                                                                                                                        {{ $product->quantity_stock <= 5
                                 ? 'bg-error-container text-on-error-container'
                                 : 'bg-primary-container/20 text-on-primary-container'
-                                                                                                                                                }}">
+                                                                                                                                                                                                                        }}">
                                                             {{ $product->quantity_stock }} pces
                                                         </span>
 
@@ -165,11 +165,13 @@
                         class="bg-surface-container-lowest rounded-xl border border-outline-variant h-full flex flex-col shadow-sm overflow-hidden">
 
                         {{-- HEADER --}}
-                        <div
-                            class="grid grid-cols-[100px_1fr_180px_220px] bg-surface-container-low border-b border-outline-variant px-6 py-4">
+                        <div class="grid grid-cols-[100px_1fr_140px_100px_180px_220px]
+                       bg-surface-container-low border-b border-outline-variant px-6 py-4">
 
                             <span>ID</span>
                             <span>Utilisateur</span>
+                            <span>Date</span>
+                            <span>Heure</span>
                             <span>Total</span>
                             <span class="text-center">Actions</span>
 
@@ -180,66 +182,81 @@
 
                             @foreach($sales as $sale)
 
-                                                    <div
-                                                        class="group grid grid-cols-[100px_1fr_180px_220px] px-6 py-4 border-b border-outline-variant items-center hover:bg-surface-container-low transition">
+                                <div class="group grid grid-cols-[100px_1fr_140px_100px_180px_220px]
+                                   px-6 py-4 border-b border-outline-variant items-center
+                                   hover:bg-surface-container-low transition">
 
-                                                        <div>#{{ $sale->id }}</div>
+                                    {{-- ID --}}
+                                    <div class="text-body-sm text-on-surface">
+                                        #{{ $sale->id }}
+                                    </div>
 
-                                                        <div>
-                                                            {{ $sale->user->name }}
-                                                        </div>
+                                    {{-- USER --}}
+                                    <div class="text-body-sm text-on-surface">
+                                        {{ $sale->user->name }}
+                                    </div>
 
-                                                        <div class="font-bold">
-                                                            {{ number_format($sale->total_price, 2) }} DA
-                                                        </div>
-                                                        {{-- Actions --}}
-                                                        <div
-                                                            class="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                                    {{-- DATE --}}
+                                    <div class="text-body-sm text-on-surface-variant">
+                                        {{ $sale->created_at->format('Y-m-d') }}
+                                    </div>
 
-                                                            {{-- VIEW --}}
-                                                            <a href="{{ route('sales.show', $sale) }}"
-                                                                class="w-9 h-9 rounded-lg  text-secondary flex items-center justify-center hover:scale-105 transition"
-                                                                title="Voir">
-                                                                <span class="material-symbols-outlined text-[18px]">visibility</span>
-                                                            </a>
+                                    {{-- TIME --}}
+                                    <div class="text-body-sm text-on-surface-variant">
+                                        {{ $sale->created_at->format('H:i') }}
+                                    </div>
 
-                                                            {{-- REVERT --}}
-                                                            <button type="button" @click="$store.crud.openConfirm(
-                                    'Annuler la vente',
-                                    'Le stock sera restauré et la vente sera annulée',
-                                    () => document.getElementById('revert-sale-{{ $sale->id }}').submit()
-                                )" class="w-9 h-9 rounded-lg text-primary flex items-center justify-center hover:scale-105 transition"
-                                                                title="Revert">
+                                    {{-- TOTAL --}}
+                                    <div class="font-bold text-on-surface">
+                                        {{ number_format($sale->total_price, 2) }} DA
+                                    </div>
 
-                                                                <span class="material-symbols-outlined text-[18px]">undo</span>
-                                                            </button>
+                                    {{-- ACTIONS --}}
+                                    <div
+                                        class="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
 
-                                                            <form id="revert-sale-{{ $sale->id }}" method="POST"
-                                                                action="{{ route('sales.revert', $sale) }}">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                            <button type="button"
-                                                                @click="$store.crud.openConfirm(
-                                                                    'Supprimer vente',
-                                                                    'Cette action supprimera l’historique définitivement',
-                                                                    () => document.getElementById('delete-sale-{{ $sale->id }}').submit()
-                                                                )"
-                                                                class="w-9 h-9 rounded-lg text-error flex items-center justify-center hover:scale-105 transition"
-                                                                title="Delete">
+                                        {{-- VIEW --}}
+                                        <a href="{{ route('sales.show', $sale) }}"
+                                            class="w-9 h-9 rounded-lg text-secondary flex items-center justify-center hover:scale-105 transition">
+                                            <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                        </a>
 
-                                                                <span class="material-symbols-outlined text-[18px]">delete</span>
-                                                            </button>
+                                        {{-- REVERT --}}
+                                        <button type="button" @click="$store.crud.openConfirm(
+                                            'Annuler la vente',
+                                            'Le stock sera restauré et la vente sera annulée',
+                                            () => document.getElementById('revert-sale-{{ $sale->id }}').submit()
+                                        )"
+                                            class="w-9 h-9 rounded-lg text-primary flex items-center justify-center hover:scale-105 transition">
+                                            <span class="material-symbols-outlined text-[18px]">undo</span>
+                                        </button>
 
-                                                            <form id="delete-sale-{{ $sale->id }}"
-                                                                method="POST"
-                                                                action="{{ route('sales.destroy', $sale) }}">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                        </div>
+                                        <form id="revert-sale-{{ $sale->id }}" method="POST"
+                                            action="{{ route('sales.revert', $sale) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
 
-                                                    </div>
+                                        {{-- DELETE --}}
+                                        <button type="button" @click="$store.crud.openConfirm(
+                                            'Supprimer vente',
+                                            'Cette action supprimera l’historique définitivement',
+                                            () => document.getElementById('delete-sale-{{ $sale->id }}').submit()
+                                        )"
+                                            class="w-9 h-9 rounded-lg text-error flex items-center justify-center hover:scale-105 transition">
+
+                                            <span class="material-symbols-outlined text-[18px]">delete</span>
+                                        </button>
+
+                                        <form id="delete-sale-{{ $sale->id }}" method="POST"
+                                            action="{{ route('sales.destroy', $sale) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
+                                    </div>
+
+                                </div>
 
                             @endforeach
 
@@ -391,65 +408,65 @@
                 const itemTotal = item.price * item.quantity;
 
                 cartItems.innerHTML += `
-                                    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+                                                <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
 
-                                        <div class="flex justify-between items-start">
+                                                    <div class="flex justify-between items-start">
 
-                                            <div>
+                                                        <div>
 
-                                                <p class="font-bold">
-                                                    ${item.name}
-                                                </p>
+                                                            <p class="font-bold">
+                                                                ${item.name}
+                                                            </p>
 
-                                                <p class="text-sm text-on-surface-variant">
-                                                    ${item.price.toFixed(2)} DA x ${item.quantity}
-                                                </p>
+                                                            <p class="text-sm text-on-surface-variant">
+                                                                ${item.price.toFixed(2)} DA x ${item.quantity}
+                                                            </p>
 
-                                            </div>
+                                                        </div>
 
-                                            <button
-                                                onclick="removeItem(${index})"
-                                                class="text-error"
-                                            >
-                                                <span class="material-symbols-outlined">
-                                                    close
-                                                </span>
-                                            </button>
+                                                        <button
+                                                            onclick="removeItem(${index})"
+                                                            class="text-error"
+                                                        >
+                                                            <span class="material-symbols-outlined">
+                                                                close
+                                                            </span>
+                                                        </button>
 
-                                        </div>
+                                                    </div>
 
-                                        <div class="flex items-center justify-between mt-4">
+                                                    <div class="flex items-center justify-between mt-4">
 
-                                            <div class="flex items-center border border-outline-variant rounded-lg overflow-hidden">
+                                                        <div class="flex items-center border border-outline-variant rounded-lg overflow-hidden">
 
-                                                <button
-                                                    onclick="changeQty(${index},-1)"
-                                                    class="w-10 h-10"
-                                                >
-                                                    -
-                                                </button>
+                                                            <button
+                                                                onclick="changeQty(${index},-1)"
+                                                                class="w-10 h-10"
+                                                            >
+                                                                -
+                                                            </button>
 
-                                                <span class="w-10 text-center font-bold">
-                                                    ${item.quantity}
-                                                </span>
+                                                            <span class="w-10 text-center font-bold">
+                                                                ${item.quantity}
+                                                            </span>
 
-                                                <button
-                                                    onclick="changeQty(${index},1)"
-                                                    class="w-10 h-10"
-                                                >
-                                                    +
-                                                </button>
+                                                            <button
+                                                                onclick="changeQty(${index},1)"
+                                                                class="w-10 h-10"
+                                                            >
+                                                                +
+                                                            </button>
 
-                                            </div>
+                                                        </div>
 
-                                            <p class="font-bold text-secondary">
-                                                ${itemTotal.toFixed(2)} DA
-                                            </p>
+                                                        <p class="font-bold text-secondary">
+                                                            ${itemTotal.toFixed(2)} DA
+                                                        </p>
 
-                                        </div>
+                                                    </div>
 
-                                    </div>
-                                `;
+                                                </div>
+                                            `;
             });
 
             totalPrice.innerText =

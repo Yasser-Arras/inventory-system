@@ -79,8 +79,7 @@
                 </div>
 
                 <img class="w-9 h-9 md:w-10 md:h-10 rounded-full border-2 border-primary/20 object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfDxaVKT0cV7aXinfXVoomdj3zM4OlH8LW4hUUUa0tCOxE4r7d-rJaV3AhFa7GQ2xKH8HRmeUli5wrkgGFG9k3h3zGffb5cMvpepAIivVHg-ktwTMmFGeeba0xaGHZkI70GhiksChaNRxmZa7BS5qP7KnQabPLCti8jOWjelm7d2iPH1uUFcbSe4826KYkz7Vw7I_lmKfUplngVBJ0Tak6ySi1GlfnNq-1yfH_DK5Dv19gXQkFrT9mf6M2kcnHFvHrh6brlDyecYA"
-                    alt="Profil" />
+            src="https://www.gravatar.com/avatar/?d=mp"                    alt="Profil" />
             </a>
         </div>
     </header>
@@ -217,7 +216,7 @@
         <div class="max-w-[1440px] mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-10">
 
             <div>
-                <h2 class="text-lg font-bold">Hanout Manager</h2>
+                <h2 class="text-lg font-bold">Inventory Manager</h2>
                 <p class="text-sm opacity-70 mt-2">
                     Gestion simple et moderne des produits.
                 </p>
@@ -234,7 +233,7 @@
 
             <div>
                 <h3 class="font-semibold mb-3">Contact</h3>
-                <p class="text-sm opacity-80">contact@hanoutmanager.dz</p>
+                <p class="text-sm opacity-80">contact@Inventorymanager.dz</p>
             </div>
 
         </div>
