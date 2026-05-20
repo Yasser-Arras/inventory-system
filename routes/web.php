@@ -58,6 +58,10 @@ Route::middleware(['auth', 'role:cashier,admin'])->group(function () {
     Route::delete('/stock-movements/{movement}', [StockMovementController::class, 'destroy'])
         ->name('stock-movements.destroy');
 
+    Route::delete('/stock-movements/{movement}/revert', [StockMovementController::class, 'revert'])
+        ->name('stock-movements.revert');
+
+
     Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
     Route::get('/sales/{sale}', [SaleController::class, 'show'])->name('sales.show');
     Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');

@@ -3,7 +3,17 @@
 @section('page')
 
 <main class="ml-[260px] p-margin-desktop max-w-[1440px] min-h-screen">
+@if(session('success'))
+    <div class="px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20">
+        {{ session('success') }}
+    </div>
+@endif
 
+@if(session('error'))
+    <div class="px-4 py-3 rounded-xl bg-error-container text-on-error-container border border-error/20">
+        {{ session('error') }}
+    </div>
+@endif
     {{-- HEADER --}}
     <div class="flex items-center justify-between mb-8">
 

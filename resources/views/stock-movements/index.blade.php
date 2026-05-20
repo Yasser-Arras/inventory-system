@@ -113,7 +113,7 @@
                                                     @method('DELETE')
                                                 </form>
 
-                                                {{-- DELETE (only remove record) --}}
+                                                {{-- DELETE  --}}
                                                 <button type="button" @click="$store.crud.openConfirm(
                                 'Supprimer mouvement',
                                 'Cette action est irréversible, cela n\'affectera pas le stock mais supprimera l\'historique',
