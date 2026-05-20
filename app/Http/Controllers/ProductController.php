@@ -32,14 +32,11 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
-        // Base data
         $categories = Category::orderBy('name')->get();
         $suppliers = Supplier::orderBy('name')->get();
 
-        // Base query
         $query = Product::with(['category', 'supplier']);
 
-        // Filters
         $query->when(
             $request->name,
             fn($q, $name) =>
@@ -58,10 +55,7 @@ class ProductController extends Controller
             $q->where('supplier_id', $request->supplier_id)
         );
 
-    
         $products = $query->latest()->paginate(10)->withQueryString();
-
-       
 
         $totalProducts = Product::count();
 
@@ -69,10 +63,8 @@ class ProductController extends Controller
 
         $leastStocked = Product::orderBy('quantity_stock')->first();
 
-        // last 7 days added
         $lastWeekCount = Product::where('created_at', '>=', now()->subDays(7))->count();
 
-        // growth %
         $previousWeekCount = Product::whereBetween('created_at', [
             now()->subDays(14),
             now()->subDays(7)
@@ -104,7 +96,6 @@ class ProductController extends Controller
     public function store(Request $request): JsonResponse|RedirectResponse
     {
         $data = $this->validated($request);
-
 
         $exists = Product::where('name', $data['name'])
             ->where('price', $data['price'])
@@ -164,6 +155,4 @@ class ProductController extends Controller
             ->route('products.index')
             ->with('success', $message);
     }
-
-
 }

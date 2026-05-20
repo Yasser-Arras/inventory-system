@@ -48,27 +48,22 @@ class SaleController extends Controller
 
                 $product = Product::findOrFail($item['id']);
 
-                //  stock check
                 if ($product->quantity_stock < $item['quantity']) {
                     throw new \Exception("Stock insuffisant pour {$product->name}");
                 }
 
-                //  compute total
                 $lineTotal = $product->price * $item['quantity'];
                 $total += $lineTotal;
 
-                //  create sale item
                 SaleItem::create([
                     'sale_id' => $sale->id,
                     'product_id' => $product->id,
                     'quantity_sold' => $item['quantity'],
                 ]);
 
-                //  update stock
                 $product->decrement('quantity_stock', $item['quantity']);
             }
 
-            // update final total once
             $sale->update([
                 'total_price' => $total,
             ]);
@@ -89,9 +84,7 @@ class SaleController extends Controller
     public function destroy(Sale $sale)
     {
         DB::transaction(function () use ($sale) {
-
             foreach ($sale->items as $item) {
-
                 $product = Product::find($item->product_id);
 
                 if ($product) {

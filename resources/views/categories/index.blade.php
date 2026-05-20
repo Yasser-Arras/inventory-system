@@ -23,7 +23,6 @@
             </div>
         @endif
 
-        <!-- HEADER -->
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
             <div>
                 <h2 class="text-headline-lg font-headline-lg text-on-surface">Gestion des Catégories</h2>
@@ -39,7 +38,6 @@
             </button>
         </div>
 
-        <!-- SORT -->
         <form method="GET" action="{{ route('categories.index') }}" class="flex justify-end mb-6">
             <select name="order" onchange="this.form.submit()" class="bg-transparent border-none text-primary font-bold">
                 <option value="name" @selected(request('order') == 'name')>Nom</option>
@@ -48,41 +46,34 @@
             </select>
         </form>
 
-        <!-- GRID CARDS -->
-     <div class="category-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="category-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
 @foreach($categories as $category)
 
 @php
-    // ICON
     $iconName = str_replace(' ', '_', strtolower($category->name));
     $iconPath = "storage/category_icons/{$iconName}.png";
     $fallback = "storage/category_icons/default.png";
     $icon = file_exists(public_path($iconPath)) ? $iconPath : $fallback;
 
-    // COLOR 
     $color = $colors[$i % count($colors)];
     $i++;
 @endphp
 
 <div class="glass-card shadow rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group relative">
 
-    {{-- TOP BAR --}}
     <div class="h-2 w-full " style="background: {{ $color }}"></div>
 
     <div class="p-5">
 
-        {{-- TOP ROW: ICON  ACTIONS --}}
         <div class="flex items-center justify-between mb-4">
 
-            {{-- ICON --}}
             <div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center">
                 <span class="material-symbols-outlined text-3xl">
                     {{ $category->icon ?? 'category' }}
                 </span>
             </div>
 
-            {{-- ACTIONS  --}}
             <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
 
                 <button
@@ -118,17 +109,14 @@
 
         </div>
 
-        {{-- TITLE --}}
         <h3 class="text-headline-md font-headline-md text-on-surface mb-1">
             {{ $category->name }}
         </h3>
 
-        {{-- DESCRIPTION --}}
         <p class="text-body-sm text-on-surface-variant mb-5">
             {{ $category->description ?? 'Aucune description.' }}
         </p>
 
-        {{-- FOOTER --}}
         <div class="flex items-center gap-2 pt-4 border-t border-outline-variant">
 
             <span class="material-symbols-outlined text-primary text-sm"
@@ -151,7 +139,6 @@
 
 @endforeach
 
-{{-- ADD CARD --}}
 <div
     @click="$store.crud.openCreate('{{ route('categories.store') }}', { name: '', description: '', icon: '' })"
     class="border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-6 hover:bg-surface-container-low hover:border-primary transition-all duration-300 cursor-pointer group min-h-[220px]"
@@ -167,7 +154,6 @@
 
 </div>
 
-        <!-- FORM MODAL -->
         <x-pos.form-modal>
 
             <div>
@@ -186,7 +172,7 @@
     <div class="grid grid-cols-6 gap-2">
         @foreach($icons as $icon)
             <label class="cursor-pointer">
-                
+
                 <input
                     type="radio"
                     name="icon"

@@ -20,8 +20,14 @@
 
             {{-- SUCCESS --}}
             @if(session('success'))
-                <div class="p-3 bg-primary/10 text-primary rounded-lg">
+                <div class="px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20">
                     {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="px-4 py-3 rounded-xl bg-error-container text-on-error-container border border-error/20">
+                    {{ session('error') }}
                 </div>
             @endif
 
@@ -65,30 +71,30 @@
 
                                         {{-- EDIT --}}
                                         <button type="button" @click="$store.crud.openEdit(
-                              '{{ route('users.update', $user) }}',
-                              @js([
-                                'id' => $user->id,
-                                'name' => $user->name,
-                                'email' => $user->email,
-                                'role' => $user->role,
-                            ])
-                            )" class="material-symbols-outlined text-secondary hover:opacity-70">
+                                      '{{ route('users.update', $user) }}',
+                                      @js([
+                                        'id' => $user->id,
+                                        'name' => $user->name,
+                                        'email' => $user->email,
+                                        'role' => $user->role,
+                                    ])
+                                    )" class="material-symbols-outlined text-secondary hover:opacity-70">
                                             edit
                                         </button>
 
                                         {{-- DELETE --}}
                                         <button type="button" @click="$store.crud.openConfirm(
-                              'Supprimer utilisateur',
-                              'Cette action est irréversible',
-                              () => fetch('{{ route('users.destroy', $user) }}', {
-                                method: 'POST',
-                                headers: {
-                                  'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                  'X-Requested-With': 'XMLHttpRequest'
-                                },
-                                body: new URLSearchParams({ _method: 'DELETE' })
-                              }).then(() => window.location.reload())
-                            )" class="material-symbols-outlined text-error hover:opacity-70">
+                                      'Supprimer utilisateur',
+                                      'Cette action est irréversible',
+                                      () => fetch('{{ route('users.destroy', $user) }}', {
+                                        method: 'POST',
+                                        headers: {
+                                          'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                          'X-Requested-With': 'XMLHttpRequest'
+                                        },
+                                        body: new URLSearchParams({ _method: 'DELETE' })
+                                      }).then(() => window.location.reload())
+                                    )" class="material-symbols-outlined text-error hover:opacity-70">
                                             delete
                                         </button>
 
@@ -127,7 +133,7 @@
             {{-- NAME --}}
             <div>
                 <label>Nom</label>
-                <input type="text" name="name" :value="$store.crud.formData.name"  placeholder="Nom"
+                <input type="text" name="name" :value="$store.crud.formData.name" placeholder="Nom"
                     @input="$store.crud.formData.name = $event.target.value" class="w-full border rounded-lg p-2">
             </div>
 

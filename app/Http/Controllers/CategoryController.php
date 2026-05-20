@@ -86,7 +86,7 @@ class CategoryController extends Controller
         }
 
         $categories = $query->paginate(10)->withQueryString();
-                    
+
         return view('categories.index', [
             'categories' => $categories,
             'icons' => $this->icons,

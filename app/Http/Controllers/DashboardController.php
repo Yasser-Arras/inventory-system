@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
 class DashboardController extends Controller
 {
 
-
     public function index()
     {
         $totalProducts = Product::count();
@@ -65,7 +64,6 @@ class DashboardController extends Controller
     {
         $items = collect();
 
-        // SALES
         Sale::query()
             ->latest()
             ->with('user')
@@ -84,7 +82,6 @@ class DashboardController extends Controller
                 ]);
             });
 
-        // STOCK MOVEMENTS
         StockMovement::query()
             ->with('product')
             ->latest()
@@ -104,7 +101,6 @@ class DashboardController extends Controller
                 ]);
             });
 
-        // PRODUCTS
         Product::query()
             ->with('category')
             ->latest()
