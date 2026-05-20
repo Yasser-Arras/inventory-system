@@ -19,8 +19,15 @@
   <div class="flex items-center gap-4 md:gap-6">
     <button type="button"
       class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">notifications</button>
-    <button type="button"
-      class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">help_outline</button>
+   
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <button type="submit"
+                    class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">
+                    logout
+                </button>
+            </form>
     <div class="h-8 w-px bg-outline-variant mx-2"></div>
     <div class="flex items-center gap-3">
       <div class="text-right hidden sm:block">

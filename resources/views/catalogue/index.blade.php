@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Hanout Manager</title>
+    <title>Inventory Manager</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -41,6 +41,7 @@
 
 
         <div class="flex items-center gap-4 md:gap-6">
+
             <a href="{{ route('dashboard') }}"
                 class="flex items-center gap-3 px-6 py-2 rounded-lg bg-green-700 text-white hover:bg-green-700 transition shadow-sm">
 
@@ -53,21 +54,34 @@
                 </span>
 
             </a>
+
             <button type="button"
                 class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">notifications</button>
-            <button type="button"
-                class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">help_outline</button>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <button type="submit"
+                    class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">
+                    logout
+                </button>
+            </form>
             <div class="h-8 w-px bg-outline-variant mx-2"></div>
-            <div class="flex items-center gap-3">
+            <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 hover:opacity-80 transition">
                 <div class="text-right hidden sm:block">
-                    <p class="text-body-sm font-bold text-on-surface leading-none">{{ auth()->user()->name ?? 'User' }}
+                    <p class="text-body-sm font-bold text-on-surface leading-none">
+                        {{ auth()->user()->name ?? 'User' }}
                     </p>
-                    <p class="text-[11px] text-on-surface-variant"> {{ auth()->user()->role ? ucfirst(auth()->user()->role) : 'User' }}</p>
+
+                    <p class="text-[11px] text-on-surface-variant">
+                        {{ auth()->user()->role ? ucfirst(auth()->user()->role) : 'User' }}
+                    </p>
                 </div>
+
                 <img class="w-9 h-9 md:w-10 md:h-10 rounded-full border-2 border-primary/20 object-cover"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfDxaVKT0cV7aXinfXVoomdj3zM4OlH8LW4hUUUa0tCOxE4r7d-rJaV3AhFa7GQ2xKH8HRmeUli5wrkgGFG9k3h3zGffb5cMvpepAIivVHg-ktwTMmFGeeba0xaGHZkI70GhiksChaNRxmZa7BS5qP7KnQabPLCti8jOWjelm7d2iPH1uUFcbSe4826KYkz7Vw7I_lmKfUplngVBJ0Tak6ySi1GlfnNq-1yfH_DK5Dv19gXQkFrT9mf6M2kcnHFvHrh6brlDyecYA"
                     alt="Profil" />
-            </div>
+            </a>
         </div>
     </header>
 </head>
@@ -75,16 +89,16 @@
 <body class="bg-surface text-on-surface font-body-md antialiased">
 
     <main class="max-w-[1440px] mx-auto px-6 md:px-10 py-10 mb-8">
-<header class="mb-8">
-    <h1 class="text-3xl md:text-4xl font-bold text-on-surface">
-        Product Showcase
-    </h1>
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-on-surface">
+                Product Showcase
+            </h1>
 
-    <p class="text-on-surface-variant mt-2 max-w-2xl">
-        Explorez le catalogue des produits disponibles et gérez votre inventaire facilement.
-    </p>
-</header>
-        
+            <p class="text-on-surface-variant mt-2 max-w-2xl">
+                Explorez le catalogue des produits disponibles et gérez votre inventaire facilement.
+            </p>
+        </header>
+
         {{-- CATEGORY FILTERS --}}
         <section class="mb-10 overflow-x-auto no-scrollbar  py-2">
             <div class="flex gap-3 min-w-max" id="categoryScroll">
@@ -97,8 +111,9 @@
                 </a>
 
                 @foreach($categories as $cat)
-                    <a href="?category={{ $cat->id }}&search={{ request('search') }}" class="flex items-center gap-2 px-5 py-2 rounded-full border
-                               {{ request('category') == $cat->id ? 'bg-primary text-white' : 'bg-surface-container' }}">
+                    <a href="?category={{ $cat->id }}&search={{ request('search') }}"
+                        class="flex items-center gap-2 px-5 py-2 rounded-full border
+                                   {{ request('category') == $cat->id ? 'bg-primary text-white' : 'bg-surface-container' }}">
 
                         <span class="material-symbols-outlined">
                             {{ $cat->icon ?? 'category' }}
@@ -176,7 +191,7 @@
                                 {{-- STOCK --}}
                                 <div class="col-span-3 flex justify-center">
                                     <span class="text-sm px-3 py-1 rounded-full
-                                                {{ $p->quantity_stock > 0
+                                                            {{ $p->quantity_stock > 0
                     ? 'bg-green-100 text-green-700'
                     : 'bg-red-100 text-red-600' }}">
                                         {{ $p->quantity_stock > 0 ? 'Disponible' : 'Indisponible' }}
@@ -193,7 +208,7 @@
             </div>
         </section>
 
-       {{ $products->withQueryString()->links() }}
+        {{ $products->withQueryString()->links() }}
 
     </main>
 

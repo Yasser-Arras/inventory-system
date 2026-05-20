@@ -6,11 +6,14 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
   <title>{{ $title ?? 'Inventory Manager' }}</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js@11.1.0/public/assets/styles/choices.min.css">
-<script src="https://cdn.jsdelivr.net/npm/choices.js@11.1.0/public/assets/scripts/choices.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js@11.1.0/public/assets/styles/choices.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/choices.js@11.1.0/public/assets/scripts/choices.min.js"></script>
 </head>
+
+
+
 
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden"
       x-data="posUi()">
