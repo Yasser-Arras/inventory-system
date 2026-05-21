@@ -133,7 +133,7 @@ Le système contient 3 rôles :
 * Admin
 * Caissier
 * Utilisateur
-* 
+
 #  Comptes de démonstration
 
 | Rôle        | Nom      | Email                                         | Mot de passe |
