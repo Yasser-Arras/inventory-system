@@ -1,59 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+#  Système de Gestion de Stock
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Application web de gestion de stock réalisée avec Laravel et Tailwind CSS.
+Ce projet permet de gérer les produits, les ventes, les fournisseurs, les utilisateurs et les mouvements de stock dans une interface moderne et simple.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Fonctionnalités
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* Gestion des produits
+* Gestion des catégories
+* Gestion des fournisseurs
+* Gestion des utilisateurs
+* Gestion des ventes
+* Gestion des mouvements de stock
+* Tableau de bord avec statistiques
+* Système de rôles (Admin / Caissier / Utilisateur)
+* Interface responsive moderne
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+#  Technologies utilisées
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+* Laravel
+* PHP
+* MySQL
+* Tailwind CSS
+* Vite
+* Alpine.js
+* Javascript
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#  Installation du projet
 
-## Laravel Sponsors
+## 1. Cloner le projet
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+## 2. Entrer dans le dossier du projet
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash id="r1v1c5"
+cd votre-repository
+```
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 3. Installer les dépendances PHP
 
-## Code of Conduct
+```bash id="z4mv2w"
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 4. Installer les dépendances Node.js
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash id="4kjf0q"
+npm install
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 5. Créer le fichier `.env`
+
+```bash id="eyg2d5"
+cp .env.example .env
+```
+
+---
+
+## 6. Générer la clé Laravel
+
+```bash id="lb5qst"
+php artisan key:generate
+```
+
+---
+
+## 7. Configurer la base de données
+
+Modifier les informations dans le fichier `.env` :
+
+```env id="p0r4zu"
+DB_DATABASE=nom_de_la_base
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+---
+
+## 8. Lancer les migration
+
+```bash id="avw1na"
+php artisan migrate
+```
+
+---
+
+## 9. Lancer le seeder
+
+```bash id="avw1na"
+php artisan db:seed
+```
+
+---
+#  Lancer le projet
+
+## Démarrer le serveur Laravel
+
+```bash id="gg2jpi"
+php artisan serve
+```
+
+## Démarrer Vite
+
+```bash id="3qjlwm"
+npm run dev
+```
+
+---
+
+#  Build production
+
+```bash id="4yffur"
+npm run build
+```
+
+---
+
+# 👤 Comptes / rôles
+
+Le système contient 3 rôles :
+
+* Admin
+* Caissier
+* Utilisateur
+* 
+#  Comptes de démonstration
+
+| Rôle        | Nom      | Email                                         | Mot de passe |
+| ----------- | -------- | --------------------------------------------- | ------------ |
+| Admin       | Admin1   | [admin@test.com](mailto:admin@test.com)       | password     |
+| Caissier    | Cashier1 | [cashier@test.com](mailto:cashier@test.com)   | password     |
+| Utilisateur | John Doe | [johndoe@gmail.com](mailto:johndoe@gmail.com) | 00000000     |
+
+---
+
+
+Projet réalisé par Yasser Arras.
