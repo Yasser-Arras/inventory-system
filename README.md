@@ -126,7 +126,7 @@ npm run build
 
 ---
 
-# 👤 Comptes / rôles
+# Comptes / rôles
 
 Le système contient 3 rôles :
 
